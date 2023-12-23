@@ -72,4 +72,8 @@ Route::post('/warga/store', [WargaController::class, 'store']);
 
 Route::get('/warga/{id}/ubah', [WargaController::class, 'ubah']);
 Route::put('/warga/{id}', [WargaController::class, 'update']);
-Route::delete('/warga/{id}', [WargaController::class, 'hapus']);
+Route::delete('/warga/{id}', [WargaController::class, 'destroy']);
+
+Route::get('/warga/hasil', [WargaController::class, 'showResult']);
+Route::get('/warga/cari', [WargaController::class, 'cari']);
+Route::get('/warga/urut', [WargaController::class, 'urut']);

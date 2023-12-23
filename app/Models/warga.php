@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class warga extends Model
 {
     use HasFactory;
-    protected $table = 'Warga';
+    protected $table = 'warga';
     // protected $fillable = ['Nama', 'Gambar','Email', 'Instagram', 'Tiktok'];
     protected $guarded = [];
 }

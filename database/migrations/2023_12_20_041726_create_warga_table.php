@@ -18,15 +18,16 @@ return new class extends Migration
             $table->string('Email')->unique();
             $table->string('Instagram');
             $table->string('Tiktok');
+            $table->string('vote')->nullable();
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::dropIfExists('warga');
+        Schema::table('warga', function (Blueprint $table) {
+            $table->dropColumn('vote');
+        });
     }
 };
