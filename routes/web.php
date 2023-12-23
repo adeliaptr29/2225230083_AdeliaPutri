@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\WargaController;
@@ -15,65 +14,44 @@ use App\Http\Controllers\WargaController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('warga.index', [
-        "title" => "Warga",
-        "active" => 'warga'
-    ]);
+
+// Route group untuk halaman yang dapat diakses oleh semua pengguna
+Route::group([], function () {
+    // Route untuk halaman login
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate']);
+
+    // Route untuk halaman register
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store']);
 });
 
-Route::get('/warga', function () {
-    return view('warga.index', [
-        "title" => "Warga",
-        "active" => 'warga'
-    ]);
+// Route group untuk halaman yang hanya dapat diakses oleh pengguna yang sudah login
+Route::group(['middleware' => 'checklogin'], function () {
+    // Route untuk halaman warga.index
+    Route::get('/', [WargaController::class, 'index'])->name('warga.index');
+    Route::get('/warga', [WargaController::class, 'index']);
+
+    // Route untuk halaman warga.tambah
+    Route::get('/warga/tambah', [WargaController::class, 'create'])->name('warga.tambah');
+    Route::post('/warga/store', [WargaController::class, 'store']);
+
+    // Route untuk halaman warga.ubah
+    Route::get('/warga/{id}/ubah', [WargaController::class, 'ubah'])->name('warga.ubah');
+    Route::put('/warga/{id}', [WargaController::class, 'update']);
+
+    // Route untuk halaman warga.destroy
+    Route::delete('/warga/{id}', [WargaController::class, 'destroy'])->name('warga.destroy');
+
+    // Route untuk halaman warga.hasil
+    Route::get('/warga/hasil', [WargaController::class, 'showResult'])->name('warga.hasil');
+
+    // Route untuk halaman warga.cari
+    Route::get('/warga/cari', [WargaController::class, 'cari'])->name('warga.cari');
+
+    // Route untuk halaman warga.urut
+    Route::get('/warga/urut', [WargaController::class, 'urut'])->name('warga.urut');
+
+    // Route untuk halaman logout
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
-
-Route::get('/warga/tambah', function () {
-    return view('warga.tambah', [
-        "title" => "Tambah",
-        "active" => 'tambah'
-    ]);
-});
-
-
-Route::get('/register', function () {
-    return view('register.index', [
-        "title" => "Register",
-        "active" => 'register'
-    ]);
-});
-
-Route::get('/login', function () {
-    return view('login.index',  [
-        "title" => "Login",
-        "active" => 'login'
-    ]);
-});
-
-Route::get('/logout', function () {
-    return view('logout',  [
-        "title" => "Logout",
-        "active" => 'logout'
-    ]);
-});
-
-Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
-
-Route::get('/register', [RegisterController::class, 'index']);
-Route::post('/register', [RegisterController::class, 'store']);
-
-Route::get('/', [WargaController::class, 'index']);
-Route::get('/warga', [WargaController::class, 'index']);
-Route::get('/warga/tambah', [WargaController::class, 'create']);
-Route::post('/warga/store', [WargaController::class, 'store']);
-
-Route::get('/warga/{id}/ubah', [WargaController::class, 'ubah']);
-Route::put('/warga/{id}', [WargaController::class, 'update']);
-Route::delete('/warga/{id}', [WargaController::class, 'destroy']);
-
-Route::get('/warga/hasil', [WargaController::class, 'showResult']);
-Route::get('/warga/cari', [WargaController::class, 'cari']);
-Route::get('/warga/urut', [WargaController::class, 'urut']);

@@ -7,6 +7,8 @@
             text-align: center;
             background-color: #f5f5dc;
             font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
         }
 
         form {
@@ -150,7 +152,7 @@
 
     </form>
 
-    <a href="/login">Sudah punya akun? Login sekarang</a>
+    <a class="tombol" href="/login">Sudah punya akun? Login sekarang</a>
 
     <div class="credit">
         2225230083 - Adelia Putri - 1A

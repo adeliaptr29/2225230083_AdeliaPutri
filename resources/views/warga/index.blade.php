@@ -42,6 +42,8 @@
         input {
             margin-top: 10px;
             padding: 8px;
+            border: 1px solid #8B4513;
+            border-radius: 5px;
         }
 
         table {
@@ -70,6 +72,7 @@
         img {
             height: 50px;
             width: auto;
+            border-radius: 5px;
         }
 
         .container {
@@ -89,17 +92,16 @@
         .form-container {
             display: flex;
             justify-content: space-around;
-
         }
 
-        .action {
+        .tombol-logout {
             display: flex;
-            justify-content: space-between;
-            margin-left: 5px;
-            margin-right: 5px;
+            justify-content: right;
+            margin-right: 20px; 
         }
 
-        .aksi{
+        .aksi {
+            display: flex;
             justify-content: space-around;
         }
 
@@ -114,12 +116,12 @@
             color: #fff;
             background-color: #04AA6D;
             border: none;
-            border-radius: 10px;
+            border-radius: 5px;
             box-shadow: 0 5px #999;
         }
 
         .tombol:hover {
-            background-color: #aa0404
+            background-color: #aa0404;
         }
 
         .tombol:active {
@@ -138,13 +140,17 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
 
-<div class="action">
-    <a class="tombol" href="/warga/tambah">Tambah data</a>
-    <a class="tombol" href="logout">Logout</a>
-</div>
-
+    <div class="tombol-logout">
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="tombol">Logout</button>
+        </form>
+    </div>
+    
     <h1>Pengisian Data</h1>
-
+    
+    <a class="tombol" href="/warga/tambah">Tambah data</a>
+    
     <div class="form-container">
         <form action="/warga/urut" method="get">
             <label for="urut">Urut berdasarkan :</label>
@@ -190,14 +196,15 @@
                             <td>{{ $w->Instagram }}</td>
                             <td>{{ $w->Tiktok }}</td>
                             <td>{{ $w->vote }}</td>
-                            <td class="aksi">
-                                <a class="tombol" href="/warga/{{ $w->id }}/ubah">Edit</a>
-                                <form action="/warga/{{ $w->id }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                            <td>
+                                <a href="/warga/{{ $w->id }}/ubah">Edit </a>
+                                <form action="/warga/{{ $w->id }}" method="POST"
+                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                                     @csrf
                                     @method('Delete')
                                     <button class="tombol" type="submit">Delete</button>
                                 </form>
-                            </td>                            
+                            </td>
                         </tr>
                     @endforeach
                 @else

@@ -7,6 +7,8 @@
             text-align: center;
             background-color: #f5f5dc;
             font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
         }
 
         form {

@@ -65,7 +65,6 @@
 
 <header class="action">
     <a class="tombol" href="/">Home</a></li>
-    <a class="tombol" href="/logout">Logout</a></li>
 </header>
 
 <body>
