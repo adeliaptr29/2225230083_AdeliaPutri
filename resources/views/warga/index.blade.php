@@ -72,7 +72,7 @@
 	
 					<tr>
 						<th>No.</th>
-						<th>Nama</th>
+						<th>Nama Lengkap</th>
 						<th>Gambar</th>
 						<th>Email</th>
 						<th>Instagram</th>
@@ -83,7 +83,7 @@
 					@foreach($warga as $w)
 						<tr>
 							<td>{{$loop->iteration}}</td>
-							<td>{{$w->Name}}</td>
+							<td>{{$w->Nama}}</td>
 							<td>{{$w->Gambar}}</td>
 							<td>{{$w->Email}}</td>
 							<td>{{$w->Instagram}}</td>

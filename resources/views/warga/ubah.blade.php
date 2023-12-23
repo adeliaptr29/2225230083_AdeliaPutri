@@ -91,7 +91,7 @@ if( isset($_POST["submit"]) ) {
 		<ul>
 			<li>
 				<label for="name">Nama : </label>
-				<input type="text" name="Name" id="name" class="@error('name') is-invalid @enderror" required value="{{$warga->Nama}}">
+				<input type="text" name="Nama" id="name" class="@error('name') is-invalid @enderror" required value="{{$warga->Nama}}">
 				@error('name')
 				<div class="invalid-feedback">
 				  {{ $message }}

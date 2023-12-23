@@ -80,17 +80,17 @@ if( isset($_POST["submit"]) ) {
         text-align: center;
     }
 </style>
-	<title>Tambah data orang</title>
+	<title>Tambah Data</title>
 </head>
 <body>
-	<h1>Tambah data orang</h1>
+	<h1>Tambah Data</h1>
 
 	<form action="/warga/store" method="post">
 		@csrf
 		<ul>
 			<li>
-				<label for="name">Nama : </label>
-				<input type="text" name="Name" id="name" class="@error('name') is-invalid @enderror" required value="{{ old('name') }}">
+				<label for="name">Nama Lengkap : </label>
+				<input type="text" name="Nama" id="nama" class="@error('name') is-invalid @enderror" required value="{{ old('name') }}">
 				@error('name')
 				<div class="invalid-feedback">
 				  {{ $message }}
