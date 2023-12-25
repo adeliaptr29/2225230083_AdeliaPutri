@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\File;
 
 class WargaController extends Controller
 {
@@ -50,31 +51,27 @@ class WargaController extends Controller
     {
         // menemukan data warga berdasarkan id
         $warga = Warga::find($id);
+        $warga->Nama = $request->input('Nama');
+        $warga->Email = $request->input('Email');
+        $warga->Instagram = $request->input('Instagram');
+        $warga->Tiktok = $request->input('Tiktok');
 
         if ($request->hasFile('Gambar')) {
             // menghapus file gambar lama dari folder image
-            $gambar_lama = $warga->Gambar;
-            $path = 'image/' . $gambar_lama;
-            if (file_exists($path)) {
-                unlink($path);
+            $tujuan_upload = 'image';
+            if (File::exists($tujuan_upload)) 
+            {
+                File::delete($tujuan_upload);
             }
 
             // mengganti nama file gambar baru dengan nama file gambar lama
-            $file = $request->file('Gambar');
-            $nama_file = $warga->Gambar;
-            $waktu_lama = substr($nama_file, 0, 10); // mengambil bagian waktu dari nama file gambar lama
-            $waktu_baru = time(); // mengambil waktu saat ini
-            $nama_file = str_replace($waktu_lama, $waktu_baru, $nama_file); // mengganti bagian waktu dari nama file gambar dengan waktu baru
-            $tujuan_upload = 'image';
+            $file = $request->file('Gambar'); 
+            $extention = $file->getClientOriginalExtension();
+            $nama_file = time().'.'.$extention; // mengganti bagian waktu dari nama file gambar dengan waktu baru
             $file->move($tujuan_upload, $nama_file);
-
-            // mengupdate data warga ke database dengan gambar baru
-            $warga->Gambar = $nama_file; // menambahkan baris ini untuk menyimpan nama file gambar baru ke kolom Gambar
-            $warga->update($request->except(['_token', 'submit', 'gambar_lama']));
-        } else {
-            // mengupdate data warga ke database tanpa mengubah gambar
-            $warga->update($request->except(['_token', 'submit', 'gambar_lama', 'Gambar']));
-        }
+            $warga->Gambar = $nama_file;
+        } 
+        $warga->update($request->except(['_token', 'submit', 'gambar_lama', 'Gambar']));
         return redirect('/');
     }
 
