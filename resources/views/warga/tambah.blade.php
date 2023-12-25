@@ -145,12 +145,12 @@
 				required value="{{ old('vote') }}">
 					<option value="">--Pilih Salah Satu--</option>
 					<option value="PASLON 1">1 - Anies Baswedan dan Muhaimin Iskandar  </option>
-					<option value="PASLON 2">2 - Ganjar Pranowo dan Mahfud MD</option>
-					<option value="PASLON 3">3 - Prabowo Subianto dan Gibran Rakabuming</option>
+					<option value="PASLON 2">2 - Prabowo Subianto dan Gibran Rakabuming</option>
+					<option value="PASLON 3">3 - Ganjar Pranowo dan Mahfud MD</option>
 				</select>
             <li>
                 <label for="gambar">Gambar :</label>
-                <input type="text" name="Gambar" id="gambar" class="@error('gambar') is-invalid @enderror"
+                <input type="file" name="Gambar" id="gambar" class="@error('gambar') is-invalid @enderror"
                     required>
                 @error('gambar')
                     <div class="invalid-feedback">

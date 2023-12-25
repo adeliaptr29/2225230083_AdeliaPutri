@@ -21,7 +21,22 @@ class WargaController extends Controller
 
     public function store(Request $request)
     {
-        Warga::create($request->except(['_token', 'submit']));
+        $file = $request->file('Gambar');
+
+        $nama_file = time() . "_" . $file->getClientOriginalName();
+
+        $tujuan_upload = 'image';
+        $file->move($tujuan_upload, $nama_file);
+
+        Warga::create([
+            'Nama' => $request->Nama,
+            'Gambar' => $nama_file,
+            'Email' => $request->Email,
+            'Instagram' => $request->Instagram,
+            'Tiktok' => $request->Tiktok,
+            'vote' => $request->vote
+        ]);
+
         return redirect('/');
     }
 
@@ -33,9 +48,34 @@ class WargaController extends Controller
 
     public function update($id, Request $request)
     {
+        // menemukan data warga berdasarkan id
         $warga = Warga::find($id);
-        $warga->update($request->except(['_token', 'submit']));
-        return redirect('/warga');
+
+        if ($request->hasFile('Gambar')) {
+            // menghapus file gambar lama dari folder image
+            $gambar_lama = $warga->Gambar;
+            $path = 'image/' . $gambar_lama;
+            if (file_exists($path)) {
+                unlink($path);
+            }
+
+            // mengganti nama file gambar baru dengan nama file gambar lama
+            $file = $request->file('Gambar');
+            $nama_file = $warga->Gambar;
+            $waktu_lama = substr($nama_file, 0, 10); // mengambil bagian waktu dari nama file gambar lama
+            $waktu_baru = time(); // mengambil waktu saat ini
+            $nama_file = str_replace($waktu_lama, $waktu_baru, $nama_file); // mengganti bagian waktu dari nama file gambar dengan waktu baru
+            $tujuan_upload = 'image';
+            $file->move($tujuan_upload, $nama_file);
+
+            // mengupdate data warga ke database dengan gambar baru
+            $warga->Gambar = $nama_file; // menambahkan baris ini untuk menyimpan nama file gambar baru ke kolom Gambar
+            $warga->update($request->except(['_token', 'submit', 'gambar_lama']));
+        } else {
+            // mengupdate data warga ke database tanpa mengubah gambar
+            $warga->update($request->except(['_token', 'submit', 'gambar_lama', 'Gambar']));
+        }
+        return redirect('/');
     }
 
     public function destroy($id)

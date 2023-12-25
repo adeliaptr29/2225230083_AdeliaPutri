@@ -187,7 +187,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $w->Nama }}</td>
-                            <td><img src="{{ asset($w->Gambar) }}" alt="{{ $w->Nama }}"></td>
+                            <td><img src="{{ asset('image/'.$w->Gambar) }}" alt="{{ $w->Nama }}"></td>
                             <td>{{ $w->Email }}</td>
                             <td>{{ $w->Instagram }}</td>
                             <td>{{ $w->Tiktok }}</td>
