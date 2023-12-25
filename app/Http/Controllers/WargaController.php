@@ -55,6 +55,7 @@ class WargaController extends Controller
         $warga->Email = $request->input('Email');
         $warga->Instagram = $request->input('Instagram');
         $warga->Tiktok = $request->input('Tiktok');
+        $warga->vote = $request->input('vote');
 
         if ($request->hasFile('Gambar')) {
             // menghapus file gambar lama dari folder image

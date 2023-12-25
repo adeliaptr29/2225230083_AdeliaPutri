@@ -23,11 +23,11 @@ class WargaFactory extends Factory
     {
         return [
             'Nama' => $this->faker->name,
-            'Gambar' => $this->faker->imageUrl(200, 200, 'people'),
+            'Gambar' => $this->faker->image('public/image', 640, 480, null, false),
             'Email' => $this->faker->unique()->safeEmail,
             'Instagram' => $this->faker->userName,
             'Tiktok' => $this->faker->userName,
-            'vote' => $this->faker->randomElement(['PASLON 1', 'PASLON 2', 'PASLON 3', null]),
+            'vote' => $this->faker->randomElement(['PASLON 1', 'PASLON 2', 'PASLON 3']),
         ];
     }
 }

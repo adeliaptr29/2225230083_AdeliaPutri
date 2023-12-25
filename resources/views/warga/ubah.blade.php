@@ -126,12 +126,11 @@
                 @enderror
             </li>
 			<li>
-				<label for="vote">Pilih Capres dan Cawapres:</label>
-				<select name="vote" id="vote" class="@error('vote') is-invalid @enderror">
-                <option value="PASLON 1">1 - Anies Baswedan dan Muhaimin Iskandar  </option>
-                <option value="PASLON 2">2 - Prabowo Subianto dan Gibran Rakabuming</option>
-                <option value="PASLON 3">3 - Ganjar Pranowo dan Mahfud MD</option>
-				</select>
+                <select name="vote" id="vote" class="@error('vote') is-invalid @enderror" required>
+                    <option value="PASLON 1" {{ old('vote', $warga->vote) == 'PASLON 1' ? 'selected' : '' }}>1 - Anies Baswedan dan Muhaimin Iskandar</option>
+                    <option value="PASLON 2" {{ old('vote', $warga->vote) == 'PASLON 2' ? 'selected' : '' }}>2 - Prabowo Subianto dan Gibran Rakabuming</option>
+                    <option value="PASLON 3" {{ old('vote', $warga->vote) == 'PASLON 3' ? 'selected' : '' }}>3 - Ganjar Pranowo dan Mahfud MD</option>
+                </select>                
             <li>
             <li>
                 <label for="gambar">Gambar :</label>
