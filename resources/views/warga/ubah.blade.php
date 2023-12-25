@@ -89,7 +89,7 @@
                 <label for="name">Nama Lengkap : </label>
                 <input type="text" name="Nama" id="name" class="@error('name') is-invalid @enderror" required
                     value="{{ $warga->Nama }}">
-                @error('name')
+                    @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -100,7 +100,7 @@
                 <input type="email" name="Email" id="email" class="@error('email') is-invalid @enderror"
                     required value="{{ $warga->Email }}">
                 @error('email')
-                    <div class="invalid-feedback">
+                <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
@@ -109,17 +109,17 @@
                 <label for="instagram">Instagram : </label>
                 <input type="text" name="Instagram" id="instagram" required
                     class="@error('instagram') is-invalid @enderror" required value="{{ $warga->Instagram }}">
-                @error('instagram')
+                    @error('instagram')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
-                @enderror
-            </li>
-            <li>
-                <label for="tiktok">Tiktok :</label>
-                <input type="text" name="Tiktok" id="tiktok" class="@error('tiktok') is-invalid @enderror"
+                    @enderror
+                </li>
+                <li>
+                    <label for="tiktok">Tiktok :</label>
+                    <input type="text" name="Tiktok" id="tiktok" class="@error('tiktok') is-invalid @enderror"
                     required value="{{ $warga->Tiktok }}">
-                @error('tiktok')
+                    @error('tiktok')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -127,17 +127,16 @@
             </li>
 			<li>
 				<label for="vote">Pilih Capres dan Cawapres:</label>
-				<select name="vote" id="vote" class="@error('vote') is-invalid @enderror"
-				required value="{{ old('vote') }}">
-					<option value="PASLON 1">1 - Anies Baswedan dan Muhaimin Iskandar  </option>
-					<option value="PASLON 2">2 - Ganjar Pranowo dan Mahfud MD</option>
-					<option value="PASLON 3">3 - Prabowo Subianto dan Gibran Rakabuming</option>
+				<select name="vote" id="vote" class="@error('vote') is-invalid @enderror">
+                <option value="PASLON 1">1 - Anies Baswedan dan Muhaimin Iskandar  </option>
+                <option value="PASLON 2">2 - Prabowo Subianto dan Gibran Rakabuming</option>
+                <option value="PASLON 3">3 - Ganjar Pranowo dan Mahfud MD</option>
 				</select>
             <li>
             <li>
                 <label for="gambar">Gambar :</label>
-                <input type="text" name="Gambar" id="gambar" class="@error('gambar') is-invalid @enderror"
-                    required value="{{ $warga->Gambar }}">
+                <img src="{{ asset('image/'.$warga->Gambar) }}" alt="{{ $warga->Nama }}" width="50" height="50">
+                <input type="file" name="Gambar" id="gambar" class="@error('gambar') is-invalid @enderror">
                 @error('gambar')
                     <div class="invalid-feedback">
                         {{ $message }}
