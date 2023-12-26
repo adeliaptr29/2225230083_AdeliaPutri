@@ -143,7 +143,7 @@
 				<label for="vote">Pilih Capres dan Cawapres:</label>
 				<select name="vote" id="vote" class="@error('vote') is-invalid @enderror" required>
 					<option value="">--Pilih Salah Satu--</option>
-					<option value="PASLON 1">1 - Anies Baswedan dan Muhaimin Iskandar  </option>
+					<option value="PASLON 1">1 - Anies Baswedan dan Muhaimin Iskandar</option>
 					<option value="PASLON 2">2 - Prabowo Subianto dan Gibran Rakabuming</option>
 					<option value="PASLON 3">3 - Ganjar Pranowo dan Mahfud MD</option>
 				</select>
